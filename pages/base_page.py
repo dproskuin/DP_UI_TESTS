@@ -13,20 +13,12 @@ class LoginPageLocators:
     EMAIL_INPUT = (By.CSS_SELECTOR, "input[name='email']")
 
 class BasePage:
-    """Contains driver init. and basic methods for all pages.
-       Timeout can be changed. 10 secs is default number."""
 
     def __init__(self, driver: RemoteWebDriver):
-        """
-        BasePage instance.
-        :param driver: WebDriver instance
-        :param timeout: implicit wait used by WebDriverWait (default: 30 seconds)
-        :return: None
-        """
         self.driver = driver
 
     def login(self):
-        self.open(Urls.MAIN_URL)
+        self.navigate(Urls.MAIN_URL)
         time.sleep(2)
         self.driver.find_element(By.XPATH, "//button[contains(text(), 'Ok')]").click()
         self.find_element_and_click(*LoginPageLocators.SIGN_IN_BUTTON_HEADER)
