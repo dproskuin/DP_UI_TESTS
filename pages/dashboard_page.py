@@ -1,7 +1,9 @@
 from pages.base_page import BasePage
 
+
 class DashboardPageLocators:
     pass
+
 
 class DashboardPage(BasePage):
 

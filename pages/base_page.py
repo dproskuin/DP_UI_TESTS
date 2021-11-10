@@ -6,11 +6,13 @@ from selenium.webdriver import Remote as RemoteWebDriver
 from selenium.webdriver.common.by import By
 from settings import Const, Urls
 
+
 class LoginPageLocators:
     SIGN_IN_BUTTON_HEADER = (By.CSS_SELECTOR, ".glZmJR.sc-iBzEeX .ghCdOs.sc-lbVvki > .sc-hmbstg.xvsQk")
     SIGN_IN_BUTTON_FORM = (By.CSS_SELECTOR, ".cdTyhF.dSzotL.jdiWPe.sc-bBjRSN.sc-eirqVv.sc-iNiQyp")
     PASSWORD_INPUT = (By.CSS_SELECTOR, "input[name='password']")
     EMAIL_INPUT = (By.CSS_SELECTOR, "input[name='email']")
+
 
 class BasePage:
 
