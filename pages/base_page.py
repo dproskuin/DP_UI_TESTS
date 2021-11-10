@@ -8,8 +8,8 @@ from settings import Const, Urls
 
 
 class LoginPageLocators:
-    SIGN_IN_BUTTON_HEADER = (By.CSS_SELECTOR, ".glZmJR.sc-iBzEeX .ghCdOs.sc-lbVvki > .sc-hmbstg.xvsQk")
-    SIGN_IN_BUTTON_FORM = (By.CSS_SELECTOR, ".cdTyhF.dSzotL.jdiWPe.sc-bBjRSN.sc-eirqVv.sc-iNiQyp")
+    SIGN_IN_BUTTON_HEADER = (By.CSS_SELECTOR, "button#react-collapsed-toggle-1")
+    SIGN_IN_BUTTON_FORM = (By.CSS_SELECTOR, ".sc-iUuxjF .sc-bBrNTY")
     PASSWORD_INPUT = (By.CSS_SELECTOR, "input[name='password']")
     EMAIL_INPUT = (By.CSS_SELECTOR, "input[name='email']")
 
@@ -21,9 +21,8 @@ class BasePage:
 
     def login(self):
         self.navigate(Urls.MAIN_URL)
-        time.sleep(2)
-        self.driver.find_element(By.XPATH, "//button[contains(text(), 'Ok')]").click()
         self.find_element_and_click(*LoginPageLocators.SIGN_IN_BUTTON_HEADER)
+        time.sleep(0.5)
         self.find_element_and_send_keys(*LoginPageLocators.EMAIL_INPUT, Const.EMAIL)
         self.find_element_and_send_keys(*LoginPageLocators.PASSWORD_INPUT, Const.PASSWORD)
         self.find_element_and_click(*LoginPageLocators.SIGN_IN_BUTTON_FORM)
