@@ -14,3 +14,4 @@ class Urls:
     PANGO_JUNE_03_LOCATIONS = "/network/pango_june03/locations/"
     PANGO_JUNE_03_POOLS = "/network/pango_june03/pools/"
     PANGO_JUNE_03_SETTINGS = "/settings/pango_june03"
+    PANGO_JUNE_03_BILLING = "/billing/pango_june03"

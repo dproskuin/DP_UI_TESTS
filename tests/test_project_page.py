@@ -36,3 +36,9 @@ def test_countries_page_displayed(driver):
     page = PangoJuneProjectPage(driver)
     result = page.verify_countries_screen_displayed()
     assert result is True
+
+
+def test_billing_page_displayed(driver):
+    page = PangoJuneProjectPage(driver)
+    result = page.verify_billing_page_displayed()
+    assert result is True

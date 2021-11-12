@@ -57,3 +57,11 @@ class PangoJuneProjectPage(BasePage):
 
     def verify_upload_image_button_displayed(self):
         self.is_element_present(*ProjectPageLocators.UPLOAD_IMAGE_BUTTON)
+
+    def open_billing_page(self):
+        self.navigate(Urls.PANGO_JUNE_03_BILLING)
+
+    def verify_billing_page_displayed(self):
+        self.open_billing_page()
+        self.find_and_click_element_by_visible_text("Show features")
+        self.element_by_visible_text_is_present("User management", "div")
