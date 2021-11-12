@@ -1,4 +1,4 @@
-"""This module describes Base page methods (Page object)."""
+"""This module describes Base page interaction methods (Page object)."""
 import time
 
 from selenium.common.exceptions import NoSuchElementException
