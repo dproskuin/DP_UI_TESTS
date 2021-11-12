@@ -1,6 +1,7 @@
+from selenium.webdriver.common.by import By
+
 from pages.base_page import BasePage
 from settings import Urls, Const
-from selenium.webdriver.common.by import By
 
 
 class ProjectPageLocators:
