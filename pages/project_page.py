@@ -15,6 +15,8 @@ class ProjectPageLocators:
     LOG_BUTTON = ""
     BILLING_BUTTON = ""
     UPLOAD_IMAGE_BUTTON = (By.CSS_SELECTOR, "input#settingsButtonUploadImage")
+    SEARCH_BUTTON = (By.CSS_SELECTOR, "div#ICON_PROJECT_SEARCH > .label")
+    SEARCH_INPUT = (By.CSS_SELECTOR, "input#inputDefaultId1")
 
 
 class PangoJuneProjectPage(BasePage):
@@ -67,3 +69,18 @@ class PangoJuneProjectPage(BasePage):
         self.open_billing_page()
         self.find_and_click_element_by_visible_text("Show features")
         return self.element_by_visible_text_is_present("User management", "div")
+
+    def verify_user_is_owner(self):
+        self.navigate(Urls.PANGO_JUNE_03_DASHBOARD)
+        return self.element_by_visible_text_is_present("OWNER", "div")
+
+    def verify_user_email_displayed(self):
+        return self.element_by_visible_text_is_present(Const.EMAIL, "span")
+
+    def search_the_project(self, project_name):
+        self.find_element_and_click(*ProjectPageLocators.SEARCH_BUTTON)
+        self.find_element_and_send_keys(*ProjectPageLocators.SEARCH_INPUT, project_name)
+
+    def verify_project_search_result_displayed(self, project_name):
+        self.search_the_project("june03")
+        return self.element_by_visible_text_is_present(project_name, "div")

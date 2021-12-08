@@ -44,3 +44,21 @@ def test_billing_page_displayed(driver):
     page = PangoJuneProjectPage(driver)
     result = page.verify_billing_page_displayed()
     assert result is True
+
+
+def test_verify_user_is_owner(driver):
+    page = PangoJuneProjectPage(driver)
+    result = page.verify_user_is_owner()
+    assert result is True
+
+
+def test_verify_user_email_displayed(driver):
+    page = PangoJuneProjectPage(driver)
+    result = page.verify_user_email_displayed()
+    assert result is True
+
+
+def test_verify_project_search(driver):
+    page = PangoJuneProjectPage(driver)
+    result = page.verify_project_search_result_displayed("pango_june03")
+    assert result is True
