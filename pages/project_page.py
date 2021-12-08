@@ -1,3 +1,5 @@
+import time
+
 from selenium.webdriver.common.by import By
 
 from pages.base_page import BasePage
@@ -32,31 +34,31 @@ class PangoJuneProjectPage(BasePage):
 
     def verify_countries_screen_displayed(self):
         self.open_countries_tab()
-        self.element_by_visible_text_is_present("Add location", "div")
+        return self.element_by_visible_text_is_present("Add location", "div")
 
     def open_locations_tab(self):
         self.navigate(Urls.PANGO_JUNE_03_LOCATIONS)
 
     def verify_locations_displayed(self):
         self.open_locations_tab()
-        self.element_by_visible_text_is_present("Server pools for", "div")
+        return self.element_by_visible_text_is_present("Server pools for", "div")
 
     def open_pools_tab(self):
         self.navigate(Urls.PANGO_JUNE_03_POOLS)
 
     def verify_pools_displayed(self):
         self.open_pools_tab()
-        self.element_by_visible_text_is_present("SomeTech", "div")
+        return self.element_by_visible_text_is_present("SomeTech", "div")
 
     def open_settings_tab(self):
-        self.navigate(Urls)
+        self.navigate(Urls.PANGO_JUNE_03_SETTINGS)
 
     def verify_project_description_displayed(self):
         self.open_settings_tab()
-        self.element_by_visible_text_is_present(Const.PANGO_JUNE_03_DESCRIPTION_TEXT, "textarea")
+        return self.element_by_visible_text_is_present(Const.PANGO_JUNE_03_DESCRIPTION_TEXT, "textarea")
 
     def verify_upload_image_button_displayed(self):
-        self.is_element_present(*ProjectPageLocators.UPLOAD_IMAGE_BUTTON)
+        return self.is_element_present(*ProjectPageLocators.UPLOAD_IMAGE_BUTTON)
 
     def open_billing_page(self):
         self.navigate(Urls.PANGO_JUNE_03_BILLING)
@@ -64,4 +66,4 @@ class PangoJuneProjectPage(BasePage):
     def verify_billing_page_displayed(self):
         self.open_billing_page()
         self.find_and_click_element_by_visible_text("Show features")
-        self.element_by_visible_text_is_present("User management", "div")
+        return self.element_by_visible_text_is_present("User management", "div")

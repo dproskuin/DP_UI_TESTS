@@ -4,13 +4,15 @@ import time
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver import Remote as RemoteWebDriver
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 from settings import Const, Urls
 
 
 class LoginPageLocators:
     SIGN_IN_BUTTON_HEADER = (By.CSS_SELECTOR, "button#react-collapsed-toggle-1")
-    SIGN_IN_BUTTON_FORM = (By.CSS_SELECTOR, ".sc-iUuxjF .sc-bBrNTY")
+    SIGN_IN_BUTTON_FORM = (By.CSS_SELECTOR, "[data-test-id='button.signin']")
     PASSWORD_INPUT = (By.CSS_SELECTOR, "input[name='password']")
     EMAIL_INPUT = (By.CSS_SELECTOR, "input[name='email']")
 
@@ -21,7 +23,7 @@ class BasePage:
         self.driver = driver
 
     def login(self):
-        self.navigate(Urls.MAIN_URL)
+        self.navigate('')
         self.find_element_and_click(*LoginPageLocators.SIGN_IN_BUTTON_HEADER)
         time.sleep(0.5)
         self.find_element_and_send_keys(*LoginPageLocators.EMAIL_INPUT, Const.EMAIL)
@@ -34,6 +36,7 @@ class BasePage:
         try:
             self.driver.find_element(method, value)
         except NoSuchElementException:
+            print(f'Element {value} not found!')
             return False
         return True
 
