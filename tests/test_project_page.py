@@ -68,3 +68,10 @@ def test_verify_user_dropdown_options(driver):
     page = PangoJuneProjectPage(driver)
     result = page.verify_user_dropdown_list_options()
     assert result is True
+
+
+def test_verify_add_project_button_navigation(driver):
+    page = PangoJuneProjectPage(driver)
+    result = page.verify_add_project_button_navigation()
+    assert driver.current_url == "https://developer.anchorfree.com/createProject"
+    assert result is True
