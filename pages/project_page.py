@@ -1,5 +1,6 @@
 import time
 
+from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.by import By
 
 from pages.base_page import BasePage
@@ -84,3 +85,19 @@ class PangoJuneProjectPage(BasePage):
     def verify_project_search_result_displayed(self, project_name):
         self.search_the_project("june03")
         return self.element_by_visible_text_is_present(project_name, "div")
+
+    def verify_user_dropdown_list_options(self):
+        self.find_and_click_element_by_visible_text(Const.EMAIL)
+        option_1 = self.element_by_visible_text_is_present("View Profile", "div")
+        option_2 = self.element_by_visible_text_is_present("Language", "div")
+        option_3 = self.element_by_visible_text_is_present("Profile", "div")
+
+        try:
+
+            if option_1 and option_2 and option_3 is True:
+                return True
+
+        except NoSuchElementException:
+
+            print("Element is missing!")
+            return False

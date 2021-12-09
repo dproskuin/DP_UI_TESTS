@@ -62,3 +62,9 @@ def test_verify_project_search(driver):
     page = PangoJuneProjectPage(driver)
     result = page.verify_project_search_result_displayed("pango_june03")
     assert result is True
+
+
+def test_verify_user_dropdown_options(driver):
+    page = PangoJuneProjectPage(driver)
+    result = page.verify_user_dropdown_list_options()
+    assert result is True
