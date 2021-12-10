@@ -29,7 +29,7 @@ class BasePage:
         self.find_element_and_send_keys(*LoginPageLocators.EMAIL_INPUT, Const.EMAIL)
         self.find_element_and_send_keys(*LoginPageLocators.PASSWORD_INPUT, Const.PASSWORD)
         self.find_element_and_click(*LoginPageLocators.SIGN_IN_BUTTON_FORM)
-        time.sleep(4)
+        time.sleep(5)
 
     def is_element_present(self, method: str, value: str) -> bool:
         """Return True, if element is presented on the screen. Otherwise - False"""
@@ -67,3 +67,7 @@ class BasePage:
     def find_element_by_visible_text(self, visible_text):
         locator = f'//*[contains(text(), "{visible_text}")]'
         return self.driver.find_element(By.XPATH, locator)
+
+    def find_and_click_button_by_text(self, visible_text):
+        locator = f"//button[text()='{visible_text}']"
+        return self.driver.find_element(By.XPATH, locator).click()
