@@ -4,7 +4,7 @@ from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.by import By
 
 from pages.base_page import BasePage
-from settings import Urls, Const
+from settings import Const
 
 
 class UserProfilePageLocators:
@@ -67,5 +67,3 @@ class UserProfilePage(BasePage):
         self.navigate("")
         self.change_password(Const.PASSWORD, Const.NEW_PASSWORD)
         return self.element_by_visible_text_is_present("Your password has been successfully changed", "div")
-
-

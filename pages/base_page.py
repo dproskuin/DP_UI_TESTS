@@ -22,12 +22,12 @@ class BasePage:
     def __init__(self, driver: RemoteWebDriver):
         self.driver = driver
 
-    def login(self):
+    def login(self, email, password):
         self.navigate('')
         self.find_element_and_click(*LoginPageLocators.SIGN_IN_BUTTON_HEADER)
         time.sleep(0.5)
-        self.find_element_and_send_keys(*LoginPageLocators.EMAIL_INPUT, Const.EMAIL)
-        self.find_element_and_send_keys(*LoginPageLocators.PASSWORD_INPUT, Const.PASSWORD)
+        self.find_element_and_send_keys(*LoginPageLocators.EMAIL_INPUT, email)
+        self.find_element_and_send_keys(*LoginPageLocators.PASSWORD_INPUT, password)
         self.find_element_and_click(*LoginPageLocators.SIGN_IN_BUTTON_FORM)
         time.sleep(5)
 
