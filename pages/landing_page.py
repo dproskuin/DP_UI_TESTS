@@ -1,11 +1,6 @@
 """This module contains Landing page interaction methods (Page object)."""
-import time
 from pages.base_page import BasePage
-from selenium.common.exceptions import NoSuchElementException
-from selenium.webdriver import Remote as RemoteWebDriver
-from selenium.webdriver.common.by import By
 from settings import Const
-from pages.base_page import LoginPageLocators
 
 
 class LandingPage(BasePage):
