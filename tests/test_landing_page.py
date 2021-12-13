@@ -1,5 +1,5 @@
 from pages.landing_page import LandingPage
-
+from settings import Const
 
 def test_forgot_password_screen(driver):
     page = LandingPage(driver)
@@ -7,10 +7,13 @@ def test_forgot_password_screen(driver):
     assert result is True
 
 
-def test_error_when_login_with_wrong_email(driver):
+def test_error_displayed__when_login_with_wrong_email(driver):
     page = LandingPage(driver)
+    page.logout()
+    page.login("abcd@test.com", Const.PASSWORD)
 
 
-def test_error_when_login_with_wrong_password(driver):
+def test_error_displayed_when_login_with_wrong_password(driver):
     page = LandingPage(driver)
-
+    page.logout()
+    page.login(Const.EMAIL, "123")

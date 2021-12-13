@@ -71,3 +71,7 @@ class BasePage:
     def find_and_click_button_by_text(self, visible_text):
         locator = f"//button[text()='{visible_text}']"
         return self.driver.find_element(By.XPATH, locator).click()
+
+    def logout(self):
+        self.find_and_click_element_by_visible_text(Const.EMAIL)
+        self.find_and_click_element_by_visible_text("Logout")

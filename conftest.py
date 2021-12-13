@@ -6,6 +6,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 from pages.base_page import BasePage
 from settings import Const
 
+
 @pytest.fixture(autouse=True)
 def driver():
     """Setup and teardown methods for Chrome browser. Used by every test-case."""
