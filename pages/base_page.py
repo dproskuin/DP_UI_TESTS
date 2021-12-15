@@ -4,8 +4,7 @@ import time
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver import Remote as RemoteWebDriver
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
+
 
 from settings import Const, Urls
 
@@ -24,8 +23,6 @@ class BasePage:
 
     def login(self, email, password):
         self.navigate('')
-        self.find_element_and_click(*LoginPageLocators.SIGN_IN_BUTTON_HEADER)
-        time.sleep(0.5)
         self.find_element_and_send_keys(*LoginPageLocators.EMAIL_INPUT, email)
         self.find_element_and_send_keys(*LoginPageLocators.PASSWORD_INPUT, password)
         self.find_element_and_click(*LoginPageLocators.SIGN_IN_BUTTON_FORM)

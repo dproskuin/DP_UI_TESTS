@@ -88,3 +88,6 @@ class PangoJuneProjectPage(BasePage):
     def verify_add_project_button_navigation(self):
         self.find_and_click_element_by_visible_text("Add project")
         return self.element_by_visible_text_is_present("Create project", "h1")
+
+    def verify_ability_to_add_and_delete_country(self):
+        pass
