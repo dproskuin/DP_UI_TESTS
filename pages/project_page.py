@@ -1,6 +1,8 @@
+import time
 
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import Select
 
 from pages.base_page import BasePage
 from settings import Urls, Const
@@ -17,6 +19,7 @@ class ProjectPageLocators:
     UPLOAD_IMAGE_BUTTON = (By.CSS_SELECTOR, "input#settingsButtonUploadImage")
     SEARCH_BUTTON = (By.CSS_SELECTOR, "div#ICON_PROJECT_SEARCH > .label")
     SEARCH_INPUT = (By.CSS_SELECTOR, "input#inputDefaultId1")
+    DE_LOCATION_DELETE_BUTTON = (By.XPATH, "//*[@id='screenNetwork']/table/tbody/tr[1]/td[4]")
 
 
 class PangoJuneProjectPage(BasePage):
@@ -90,4 +93,12 @@ class PangoJuneProjectPage(BasePage):
         return self.element_by_visible_text_is_present("Create project", "h1")
 
     def verify_ability_to_add_and_delete_country(self):
-        pass
+        self.open_countries_tab()
+        if self.element_by_visible_text_is_present("Germany", "div") is True:
+            add_button = self.find_element_by_visible_text("Add location")
+            self.driver.find_element(*ProjectPageLocators.DE_LOCATION_DELETE_BUTTON).click()
+            time.sleep(1)
+            add_button.click()
+            select = Select(self.driver.find_element_by_css_selector("select"))
+            select.select_by_index(0)
+            return self.element_by_visible_text_is_present("Germany", "div")

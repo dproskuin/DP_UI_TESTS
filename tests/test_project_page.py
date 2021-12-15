@@ -70,3 +70,9 @@ def test_verify_add_project_button_navigation(driver):
     result = page.verify_add_project_button_navigation()
     assert driver.current_url == "https://developer.anchorfree.com/createProject"
     assert result is True
+
+
+def test_verify_ability_to_add_and_delete_country(driver):
+    page = PangoJuneProjectPage(driver)
+    result = page.verify_ability_to_add_and_delete_country()
+    assert result is True
