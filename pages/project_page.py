@@ -1,6 +1,5 @@
 import time
 
-from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
 
@@ -17,19 +16,39 @@ class ProjectPageLocators:
     LOG_BUTTON = ""
     BILLING_BUTTON = ""
     UPLOAD_IMAGE_BUTTON = (By.CSS_SELECTOR, "input#settingsButtonUploadImage")
-    SEARCH_BUTTON = (By.CSS_SELECTOR, "div#ICON_PROJECT_SEARCH > .label")
-    SEARCH_INPUT = (By.CSS_SELECTOR, "input#inputDefaultId1")
+    PROJECT_SEARCH_BUTTON = (By.CSS_SELECTOR, "div#ICON_PROJECT_SEARCH > .label")
+    PROJECT_SEARCH_INPUT = (By.CSS_SELECTOR, "input#inputDefaultId1")
     DE_LOCATION_DELETE_BUTTON = (By.XPATH, "//*[@id='screenNetwork']/table/tbody/tr[1]/td[4]")
+    USERS_SEARCH_BUTTON = (By.CSS_SELECTOR, ".blue.flex.icons.iconsStyle1.search > svg > path")
+    USERS_FILTER_BUTTON = (By.CSS_SELECTOR, ".filterButton")
+    USER_SEARCH_OPTIONS = ["User ID", "User Name", "User Token", "Device ID"]
 
 
 class PangoJuneProjectPage(BasePage):
 
-    def assert_active_sessions_by_protocol_chart(self):
+    def verify_active_sessions_by_protocol_chart(self):
         self.navigate(Urls.PANGO_JUNE_03_DASHBOARD)
         return self.element_by_visible_text_is_present("hydra-tcp", "div")
 
     def open_users_tab(self):
         self.navigate(Urls.PANGO_JUNE_03_USERS)
+
+    def verify_delete_user_screen_opened(self):
+        pass
+
+    def verify_user_not_deleted_if_id_is_incorrect(self):
+        pass
+
+    def verify_user_search_options(self):
+        self.open_users_tab()
+        self.find_element_and_click(*ProjectPageLocators.USERS_SEARCH_BUTTON)
+        self.find_element_and_click(*ProjectPageLocators.USERS_FILTER_BUTTON)
+
+        for option in ProjectPageLocators.USER_SEARCH_OPTIONS:
+
+            if self.find_element_by_visible_text(option):
+                return True
+            return False
 
     def users_search_field_displayed(self):
         return self.element_by_visible_text_is_present("Search users", "div")
@@ -81,8 +100,8 @@ class PangoJuneProjectPage(BasePage):
         return self.element_by_visible_text_is_present(Const.EMAIL, "span")
 
     def search_the_project(self, project_name):
-        self.find_element_and_click(*ProjectPageLocators.SEARCH_BUTTON)
-        self.find_element_and_send_keys(*ProjectPageLocators.SEARCH_INPUT, project_name)
+        self.find_element_and_click(*ProjectPageLocators.PROJECT_SEARCH_BUTTON)
+        self.find_element_and_send_keys(*ProjectPageLocators.PROJECT_SEARCH_INPUT, project_name)
 
     def verify_project_search_result_displayed(self, project_name):
         self.search_the_project("june03")

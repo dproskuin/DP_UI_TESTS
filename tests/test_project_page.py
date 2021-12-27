@@ -31,7 +31,7 @@ def test_locations_page_displayed(driver):
 
 def test_active_sessions_chart_displayed(driver):
     page = PangoJuneProjectPage(driver)
-    result = page.assert_active_sessions_by_protocol_chart()
+    result = page.verify_active_sessions_by_protocol_chart()
     assert result is True
 
 
@@ -75,4 +75,10 @@ def test_verify_add_project_button_navigation(driver):
 def test_verify_ability_to_add_and_delete_country(driver):
     page = PangoJuneProjectPage(driver)
     result = page.verify_ability_to_add_and_delete_country()
+    assert result is True
+
+
+def test_verify_user_search_options(driver):
+    page = PangoJuneProjectPage(driver)
+    result = page.verify_user_search_options()
     assert result is True
