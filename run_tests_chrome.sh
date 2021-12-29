@@ -1,0 +1,1 @@
+pytest -v --disable-warnings --browser=chrome --screenshot=on --screenshot_path=on --html=report.html

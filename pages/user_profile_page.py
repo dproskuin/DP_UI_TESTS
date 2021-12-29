@@ -49,7 +49,7 @@ class UserProfilePage(BasePage):
 
     def verify_ability_to_logout(self):
         self.logout()
-        return self.element_by_visible_text_is_present("Get In Touch", "a")
+        return self.element_by_visible_text_is_present("Sign In", "div")
 
     def change_password(self, new_password, current_password):
         self.open_profile()
@@ -65,5 +65,6 @@ class UserProfilePage(BasePage):
         self.change_password(Const.NEW_PASSWORD, Const.PASSWORD)
         time.sleep(4)
         self.navigate("")
+        self.login(Const.EMAIL, Const.NEW_PASSWORD)
         self.change_password(Const.PASSWORD, Const.NEW_PASSWORD)
         return self.element_by_visible_text_is_present("Your password has been successfully changed", "div")

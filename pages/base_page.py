@@ -5,7 +5,7 @@ from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver import Remote as RemoteWebDriver
 from selenium.webdriver.common.by import By
 
-
+import settings
 from settings import Const, Urls
 
 
@@ -26,6 +26,12 @@ class BasePage:
         self.find_element_and_send_keys(*LoginPageLocators.EMAIL_INPUT, email)
         self.find_element_and_send_keys(*LoginPageLocators.PASSWORD_INPUT, password)
         self.find_element_and_click(*LoginPageLocators.SIGN_IN_BUTTON_FORM)
+
+        if self.element_by_visible_text_is_present("Email and password do not match", "div"):
+            self.driver.find_element(*LoginPageLocators.PASSWORD_INPUT).clear()
+            self.find_element_and_send_keys(*LoginPageLocators.PASSWORD_INPUT, settings.Const.NEW_PASSWORD)
+            self.find_element_and_click(*LoginPageLocators.SIGN_IN_BUTTON_FORM)
+
         time.sleep(5)
 
     def is_element_present(self, method: str, value: str) -> bool:
@@ -62,8 +68,8 @@ class BasePage:
         return self.driver.find_element(By.XPATH, locator).click()
 
     def find_element_by_visible_text(self, visible_text):
-        locator = f'//*[contains(text(), "{visible_text}")]'
-        return self.driver.find_element(By.XPATH, locator)
+        locator = (By.XPATH, f'//*[contains(text(), "{visible_text}")]')
+        return self.driver.find_element(*locator)
 
     def find_and_click_button_by_text(self, visible_text):
         locator = f"//button[text()='{visible_text}']"

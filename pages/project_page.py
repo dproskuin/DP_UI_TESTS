@@ -2,6 +2,8 @@ import time
 
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 from pages.base_page import BasePage
 from settings import Urls, Const
@@ -89,7 +91,8 @@ class PangoJuneProjectPage(BasePage):
 
     def verify_billing_page_displayed(self):
         self.open_billing_page()
-        self.find_and_click_element_by_visible_text("Show features")
+        time.sleep(5)
+        self.find_element_by_visible_text("Show features").click()
         return self.element_by_visible_text_is_present("User management", "div")
 
     def verify_user_is_owner(self):
