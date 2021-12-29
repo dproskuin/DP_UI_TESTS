@@ -11,7 +11,7 @@ from settings import Const
 
 def pytest_addoption(parser):
     parser.addoption("--browser", action="store", default="chrome",
-                     help="Choose browser: chrome, edge, firefox")
+                     help="Choose browser: chrome, firefox, docker")
 
 
 @pytest.fixture()
@@ -33,6 +33,11 @@ def driver(get_browser):
         options = webdriver.FirefoxOptions()
         options.add_argument("--start-maximized")
         driver = webdriver.Firefox(executable_path=GeckoDriverManager().install(), options=options)
+
+    if get_browser == "docker":
+        options = webdriver.ChromeOptions()
+        options.add_argument("--headless")
+        driver = webdriver.Remote("http://127.0.0.1:4444/wd/hub", options=options)
 
     driver.implicitly_wait(10)
     yield driver
