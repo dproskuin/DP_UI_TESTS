@@ -116,3 +116,12 @@ class PangoJuneProjectPage(BasePage):
     def verify_ability_to_change_projects_view_to_list(self):
         self.driver.find_element(*ProjectPageLocators.PROJECTS_LIST_VIEW_BUTTON).click()
         return self.element_by_visible_text_is_present("Company name", "div")
+
+    def open_locations_loading_tab(self):
+        self.find_and_click_element_by_visible_text("Location loading")
+
+    def verify_locations_loading_tab_opened(self):
+        self.navigate(Urls.PANGO_JUNE_03_DASHBOARD)
+        time.sleep(1.5)
+        self.open_locations_loading_tab()
+        return self.element_by_visible_text_is_present("Location loading map", "div")

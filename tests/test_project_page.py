@@ -89,3 +89,10 @@ def test_verify_ability_to_change_projects_view_to_list(driver):
     result = page.verify_ability_to_change_projects_view_to_list()
     assert result is True
 
+
+def test_verify_locations_loading_tab_opened(driver):
+    page = PangoJuneProjectPage(driver)
+    result = page.verify_locations_loading_tab_opened()
+    assert result is True
+
+
