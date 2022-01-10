@@ -72,7 +72,12 @@ class UserProfilePage(BasePage):
     def open_country_list(self):
         return self.driver.find_element(By.NAME, "country").click()
 
-    def verify_country_list_options(self):
+    def verify_country_list(self):
         self.open_profile()
         self.open_country_list()
         return self.element_by_visible_text_is_present("United Arab Emirates", "option")
+
+    def verify_email_unavailable_to_edit(self):
+        self.open_profile()
+        element = self.driver.find_element_by_css_selector("input[name='email']")
+        return element.is_enabled()

@@ -26,12 +26,14 @@ def test_verify_ability_to_change_password(driver):
     assert result is True
 
 
-def test_verify_country_list_options(driver):
+def test_verify_country_list(driver):
     page = UserProfilePage(driver)
-    result = page.verify_country_list_options()
+    result = page.verify_country_list()
     assert result is True
 
 
-
-
+def test_verify_email_unavailable_to_edit(driver):
+    page = UserProfilePage(driver)
+    result = page.verify_email_unavailable_to_edit()
+    assert result is False
 
