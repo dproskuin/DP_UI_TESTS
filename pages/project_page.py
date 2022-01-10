@@ -35,12 +35,6 @@ class PangoJuneProjectPage(BasePage):
     def open_users_tab(self):
         self.navigate(Urls.PANGO_JUNE_03_USERS)
 
-    def verify_delete_user_screen_opened(self):
-        pass
-
-    def verify_user_not_deleted_if_id_is_incorrect(self):
-        pass
-
     def verify_user_search_options(self):
         self.open_users_tab()
         self.find_element_and_click(*ProjectPageLocators.USERS_SEARCH_BUTTON)

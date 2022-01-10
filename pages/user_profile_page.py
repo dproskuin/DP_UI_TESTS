@@ -68,3 +68,11 @@ class UserProfilePage(BasePage):
         self.login(Const.EMAIL, Const.NEW_PASSWORD)
         self.change_password(Const.PASSWORD, Const.NEW_PASSWORD)
         return self.element_by_visible_text_is_present("Your password has been successfully changed", "div")
+
+    def open_country_list(self):
+        return self.driver.find_element(By.NAME, "country").click()
+
+    def verify_country_list_options(self):
+        self.open_profile()
+        self.open_country_list()
+        return self.element_by_visible_text_is_present("United Arab Emirates", "option")
