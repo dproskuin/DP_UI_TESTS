@@ -10,13 +10,7 @@ from settings import Urls, Const
 
 
 class ProjectPageLocators:
-    USERS_BUTTON = ""
-    ACTIVE_SESSIONS_BUTTON = ""
-    NETWORK_BUTTON = ""
-    SETTINGS_BUTTON = ""
-    EXPORT_DATA_BUTTON = ""
-    LOG_BUTTON = ""
-    BILLING_BUTTON = ""
+    PROJECTS_LIST_VIEW_BUTTON = (By.CSS_SELECTOR, "div#ICON_PROJECT_LIST")
     UPLOAD_IMAGE_BUTTON = (By.CSS_SELECTOR, "input#settingsButtonUploadImage")
     PROJECT_SEARCH_BUTTON = (By.CSS_SELECTOR, "div#ICON_PROJECT_SEARCH > .label")
     PROJECT_SEARCH_INPUT = (By.CSS_SELECTOR, "input#inputDefaultId1")
@@ -118,3 +112,7 @@ class PangoJuneProjectPage(BasePage):
             select = Select(self.driver.find_element_by_css_selector("select"))
             select.select_by_index(0)
             return self.element_by_visible_text_is_present("Germany", "div")
+
+    def verify_ability_to_change_projects_view_to_list(self):
+        self.driver.find_element(*ProjectPageLocators.PROJECTS_LIST_VIEW_BUTTON).click()
+        return self.element_by_visible_text_is_present("Company name", "div")

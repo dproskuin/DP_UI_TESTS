@@ -82,3 +82,10 @@ def test_verify_user_search_options(driver):
     page = PangoJuneProjectPage(driver)
     result = page.verify_user_search_options()
     assert result is True
+
+
+def test_verify_ability_to_change_projects_view_to_list(driver):
+    page = PangoJuneProjectPage(driver)
+    result = page.verify_ability_to_change_projects_view_to_list()
+    assert result is True
+
