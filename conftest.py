@@ -13,6 +13,7 @@ from settings import Const
 def pytest_addoption(parser):
     parser.addoption("--browser", action="store", default="chrome",
                      help="Choose browser: chrome, edge, firefox")
+    parser.addoption("--headless", action='store', default='off', help='headless browser: on or off')
 
 
 @pytest.fixture()
@@ -21,18 +22,32 @@ def get_browser(request):
     return browser
 
 
+@pytest.fixture()
+def headless_mode(request):
+    headless_mode = request.config.getoption('--headless')
+    return headless_mode
+
+
 @pytest.fixture(autouse=True)
-def driver(get_browser):
+def driver(get_browser, headless_mode):
     """Setup and teardown methods for Chrome browser. Used by every test-case."""
 
     if get_browser == "chrome":
         options = webdriver.ChromeOptions()
         options.add_argument("--start-maximized")
+        if headless_mode == "on":
+            options.add_argument("--headless")
+        else:
+            pass
         driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
 
     if get_browser == "firefox":
         options = webdriver.FirefoxOptions()
         options.add_argument("--start-maximized")
+        if headless_mode == "on":
+            options.add_argument("--headless")
+        else:
+            pass
         driver = webdriver.Firefox(executable_path=GeckoDriverManager().install(), options=options)
 
     driver.implicitly_wait(10)
@@ -40,7 +55,7 @@ def driver(get_browser):
     driver.quit()
 
 
-@pytest.fixture(scope="function",autouse=True)
-def setup(driver):
+@pytest.fixture(scope="function", autouse=True)
+def login(driver):
     page = BasePage(driver)
     page.login(Const.EMAIL, Const.PASSWORD)

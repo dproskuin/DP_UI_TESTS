@@ -4,6 +4,7 @@ import time
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver import Remote as RemoteWebDriver
 from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
 
 import settings
 from settings import Const, Urls
@@ -28,11 +29,18 @@ class BasePage:
         self.find_element_and_click(*LoginPageLocators.SIGN_IN_BUTTON_FORM)
 
         if self.element_by_visible_text_is_present("Email and password do not match", "div"):
+            self.driver.find_element(*LoginPageLocators.PASSWORD_INPUT).send_keys(Keys.CONTROL + 'a' + Keys.BACK_SPACE)
             self.driver.find_element(*LoginPageLocators.PASSWORD_INPUT).clear()
             self.find_element_and_send_keys(*LoginPageLocators.PASSWORD_INPUT, settings.Const.NEW_PASSWORD)
             self.find_element_and_click(*LoginPageLocators.SIGN_IN_BUTTON_FORM)
+        time.sleep(4)
 
-        time.sleep(5)
+    def raw_login(self, email, password):
+        self.navigate('')
+        self.find_element_and_send_keys(*LoginPageLocators.EMAIL_INPUT, email)
+        self.find_element_and_send_keys(*LoginPageLocators.PASSWORD_INPUT, password)
+        self.find_element_and_click(*LoginPageLocators.SIGN_IN_BUTTON_FORM)
+        time.sleep(4)
 
     def is_element_present(self, method: str, value: str) -> bool:
         """Return True, if element is presented on the screen. Otherwise - False"""

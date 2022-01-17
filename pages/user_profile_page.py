@@ -66,6 +66,7 @@ class UserProfilePage(BasePage):
         time.sleep(4)
         self.navigate("")
         self.login(Const.EMAIL, Const.NEW_PASSWORD)
+        self.driver.refresh()
         self.change_password(Const.PASSWORD, Const.NEW_PASSWORD)
         return self.element_by_visible_text_is_present("Your password has been successfully changed", "div")
 

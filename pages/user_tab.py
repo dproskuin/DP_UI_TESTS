@@ -24,7 +24,6 @@ class UserTab(BasePage):
         self.find_and_click_element_by_visible_text("Set limit")
         return self.element_by_visible_text_is_present("Unlimited", "div")
 
-
     def verify_delete_user_screen_opened(self):
         pass
 

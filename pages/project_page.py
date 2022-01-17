@@ -15,8 +15,7 @@ class ProjectPageLocators:
     PROJECT_SEARCH_BUTTON = (By.CSS_SELECTOR, "div#ICON_PROJECT_SEARCH > .label")
     PROJECT_SEARCH_INPUT = (By.CSS_SELECTOR, "input#inputDefaultId1")
     DE_LOCATION_DELETE_BUTTON = (By.XPATH, "//*[@id='screenNetwork']/table/tbody/tr[1]/td[4]")
-    USERS_SEARCH_BUTTON = (By.CSS_SELECTOR, ".blue.flex.icons.iconsStyle1.search > svg > path")
-    USERS_FILTER_BUTTON = (By.CSS_SELECTOR, ".filterButton")
+    USERS_FILTER_BUTTON = (By.CSS_SELECTOR, ".privateFiltersContainer")
     USER_SEARCH_OPTIONS = ["User ID", "User Name", "User Token", "Device ID"]
 
 
@@ -28,17 +27,6 @@ class PangoJuneProjectPage(BasePage):
 
     def open_users_tab(self):
         self.navigate(Urls.PANGO_JUNE_03_USERS)
-
-    def verify_user_search_options(self):
-        self.open_users_tab()
-        self.find_element_and_click(*ProjectPageLocators.USERS_SEARCH_BUTTON)
-        self.find_element_and_click(*ProjectPageLocators.USERS_FILTER_BUTTON)
-
-        for option in ProjectPageLocators.USER_SEARCH_OPTIONS:
-
-            if self.find_element_by_visible_text(option):
-                return True
-            return False
 
     def users_search_field_displayed(self):
         return self.element_by_visible_text_is_present("Search users", "div")

@@ -21,7 +21,7 @@ def test_error_displayed_when_login_with_wrong_email(driver):
 def test_error_displayed_when_login_with_wrong_password(driver):
     page = LandingPage(driver)
     page.logout()
-    page.login(Const.EMAIL, "123")
+    page.raw_login(Const.EMAIL, "123")
     result = page.verify_error_when_login_with_wrong_password()
     assert result is True
 
