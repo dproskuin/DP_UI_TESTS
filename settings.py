@@ -8,7 +8,7 @@ class Const:
 
 
 class Urls:
-    MAIN_URL = "https://developer.anchorfree.com"
+    MAIN_URL = "https://deploy-preview-122--pango-partner-portal.netlify.app"
     PROFILE_URL = "/profile"
     PANGO_JUNE_03_DASHBOARD = "/dashboard/pango_june03"
     PANGO_JUNE_03_USERS = "/users/pango_june03"

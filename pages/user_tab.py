@@ -18,16 +18,24 @@ class UserTabLocators:
 
 class UserTab(BasePage):
 
-    def verify_change_user_traffic_scenario(self):
-        self.navigate(Urls.get_user_url("pango_july15", "714167437"))
+    def change_user_traffic(self, project_name: str, user_id: str, traffic_in_bytes: int, is_user_unlimited: bool):
+        self.navigate(Urls.get_user_url(project_name, user_id))
         self.find_element_and_click(*UserTabLocators.TRAFFIC_SETTINGS_BUTTON)
-        self.find_element_and_click(*UserTabLocators.SET_TRAFFIC_UNLIMITED_CHECKBOX_ON)
-        self.driver.find_element(*UserTabLocators.LIMIT_FIELD).send_keys("100000000")
+
+        if is_user_unlimited is True:
+            self.find_element_and_click(*UserTabLocators.SET_TRAFFIC_UNLIMITED_CHECKBOX_ON)
+            self.driver.find_element(*UserTabLocators.LIMIT_FIELD).send_keys(traffic_in_bytes)
+            print(f"Set {traffic_in_bytes} kb of traffic for user {user_id}...")
+
+        if is_user_unlimited is False:
+            self.find_element_and_click(*UserTabLocators.SET_TRAFFIC_UNLIMITED_CHECKBOX_OFF)
+            print(f"Change user {user_id} traffic to unlimited...")
+
         self.find_and_click_element_by_visible_text("Set limit")
-        self.element_by_visible_text_is_present("95.37 Mb", "div")
-        self.driver.find_element(*UserTabLocators.TRAFFIC_SETTINGS_BUTTON).click()
-        self.find_element_and_click(*UserTabLocators.SET_TRAFFIC_UNLIMITED_CHECKBOX_OFF)
-        self.find_and_click_element_by_visible_text("Set limit")
+
+    def verify_change_user_traffic_scenario(self):
+        self.change_user_traffic("pango_july15", "714167437", 100000000, True)
+        self.change_user_traffic("pango_july15", "714167437", 100000000, False)
         return self.element_by_visible_text_is_present("Unlimited", "div")
 
     def delete_user_data(self, user_id: str, project_name: str, confirmation_user_id: str) -> bool:
