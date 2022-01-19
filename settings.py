@@ -17,5 +17,7 @@ class Urls:
     PANGO_JUNE_03_POOLS = "/network/pango_june03/pools/"
     PANGO_JUNE_03_SETTINGS = "/settings/pango_june03"
     PANGO_JUNE_03_BILLING = "/billing/pango_june03"
-    PANGO_JULY_15_TEST_USER = "/user/pango_july15/714167437"
 
+    @staticmethod
+    def get_user_url(project_name, user_id):
+        return f"/user/{project_name}/{user_id}"
