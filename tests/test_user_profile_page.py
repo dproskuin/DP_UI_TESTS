@@ -37,3 +37,9 @@ def test_verify_email_unavailable_to_edit(driver):
     result = page.verify_email_unavailable_to_edit()
     assert result is False
 
+
+def test_verify_error_when_current_password_is_not_correct(driver):
+    page = UserProfilePage(driver)
+    result = page.verify_error_when_current_password_is_not_correct()
+    assert result is True
+

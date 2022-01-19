@@ -2,6 +2,7 @@ import time
 
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.by import By
+from selenium.webdriver.common.action_chains import ActionChains
 
 from pages.base_page import BasePage
 from settings import Const
@@ -58,6 +59,9 @@ class UserProfilePage(BasePage):
         self.find_element_and_send_keys(*UserProfilePageLocators.NEW_PASSWORD_FIELD, new_password)
         self.find_element_and_send_keys(*UserProfilePageLocators.REPEAT_NEW_PASSWORD_FIELD, new_password)
         time.sleep(2)
+        element = self.find_element_by_visible_text("Change password")
+        actions = ActionChains(self.driver)
+        actions.move_to_element(element).perform()
         self.find_and_click_button_by_text("Change password")
         time.sleep(2.5)
 
@@ -69,6 +73,10 @@ class UserProfilePage(BasePage):
         self.driver.refresh()
         self.change_password(Const.PASSWORD, Const.NEW_PASSWORD)
         return self.element_by_visible_text_is_present("Your password has been successfully changed", "div")
+
+    def verify_error_when_current_password_is_not_correct(self):
+        self.change_password("111111111111", "222222222222")
+        return self.element_by_visible_text_is_present("Enter the current password", "div")
 
     def open_country_list(self):
         return self.driver.find_element(By.NAME, "country").click()
