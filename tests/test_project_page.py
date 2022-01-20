@@ -90,20 +90,3 @@ def test_verify_locations_loading_tab_opened(driver):
     assert result is True
 
 
-def test_verify_sessions_tab(driver):
-    page = PangoJuneProjectPage(driver)
-    result = page.verify_sessions_tab()
-    assert result is True
-
-
-def test_verify_purchases_tab(driver):
-    page = PangoJuneProjectPage(driver)
-    result = page.verify_purchases_tab()
-    assert result is True
-
-
-def test_verify_devices_tab(driver):
-    page = PangoJuneProjectPage(driver)
-    result = page.verify_devices_tab()
-    assert result is True
-
