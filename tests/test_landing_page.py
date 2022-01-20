@@ -1,4 +1,3 @@
-import time
 
 from pages.landing_page import LandingPage
 from settings import Const

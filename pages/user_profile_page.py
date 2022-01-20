@@ -21,6 +21,8 @@ class UserProfilePage(BasePage):
         self.find_and_click_element_by_visible_text("View Profile")
 
     def open_user_dropdown(self):
+        if self.element_by_visible_text_is_present(Const.EMAIL, 'div') is False:
+            time.sleep(3)
         self.find_and_click_element_by_visible_text(Const.EMAIL)
 
     def verify_switch_between_profile_tabs(self):
@@ -44,10 +46,6 @@ class UserProfilePage(BasePage):
             print("Element is missing!")
             return False
 
-    def logout(self):
-        self.open_user_dropdown()
-        self.find_and_click_element_by_visible_text("Logout")
-
     def verify_ability_to_logout(self):
         self.logout()
         return self.element_by_visible_text_is_present("Sign In", "div")
@@ -68,9 +66,9 @@ class UserProfilePage(BasePage):
     def verify_ability_to_change_password(self):
         self.change_password(Const.NEW_PASSWORD, Const.PASSWORD)
         time.sleep(4)
+        self.logout()
         self.navigate("")
         self.login(Const.EMAIL, Const.NEW_PASSWORD)
-        self.driver.refresh()
         self.change_password(Const.PASSWORD, Const.NEW_PASSWORD)
         return self.element_by_visible_text_is_present("Your password has been successfully changed", "div")
 
