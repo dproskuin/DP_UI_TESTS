@@ -64,6 +64,12 @@ class UserProfilePage(BasePage):
         time.sleep(2.5)
 
     def verify_ability_to_change_password(self):
+        """ This method uses "change password" method. Scenario:
+            1. Change password from PASSWORD to NEW_PASSWORD
+            2. Logout and go to login screen
+            3. Login
+            4. Change password back from NEW to PASSWORD
+        """
         self.change_password(Const.NEW_PASSWORD, Const.PASSWORD)
         time.sleep(4)
         self.logout()
@@ -73,6 +79,7 @@ class UserProfilePage(BasePage):
         return self.element_by_visible_text_is_present("Your password has been successfully changed", "div")
 
     def verify_error_when_current_password_is_not_correct(self):
+        """ Verify error displayed when user entered wrong password in to "current password" field. """
         self.change_password("111111111111", "222222222222")
         return self.element_by_visible_text_is_present("Enter the current password", "div")
 
@@ -80,6 +87,7 @@ class UserProfilePage(BasePage):
         return self.driver.find_element(By.NAME, "country").click()
 
     def verify_country_list(self):
+        """ Go to User profile and assert countries list opened and contains "UAE" option. """
         self.open_profile()
         self.open_country_list()
         return self.element_by_visible_text_is_present("United Arab Emirates", "option")

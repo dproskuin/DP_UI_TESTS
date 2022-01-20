@@ -5,8 +5,6 @@ from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver import Remote as RemoteWebDriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.wait import WebDriverWait
 
 import settings
 from settings import Const, Urls
@@ -24,7 +22,14 @@ class BasePage:
     def __init__(self, driver: RemoteWebDriver):
         self.driver = driver
 
-    def login(self, email, password):
+    def login(self, email: str, password: str):
+        """
+        Navigate to Landing page and login into account.
+        If wrong password error appeared, use another password - In order to avoid errors with "change password" tests.
+        :param email: string, user emal
+        :param password: string, user password
+        :return: None
+        """
         self.navigate('')
         self.find_element_and_send_keys(*LoginPageLocators.EMAIL_INPUT, email)
         self.find_element_and_send_keys(*LoginPageLocators.PASSWORD_INPUT, password)
@@ -54,7 +59,7 @@ class BasePage:
         return True
 
     def navigate(self, page_name):
-        """Opens given link."""
+        """Opens given URL."""
         self.driver.get(Urls.MAIN_URL + page_name)
 
     def find_element_and_send_keys(self, method: str, value: str, text: str):
@@ -69,7 +74,7 @@ class BasePage:
         """Find element and return text from it."""
         return self.driver.find_element(method, value).text
 
-    def element_by_visible_text_is_present(self, visible_text, element_type):
+    def element_by_visible_text_is_present(self, visible_text: str, element_type: str):
         locator = f'//{element_type}[contains(text(), "{visible_text}")]'
         return self.is_element_present(By.XPATH, locator)
 
@@ -86,5 +91,6 @@ class BasePage:
         return self.driver.find_element(By.XPATH, locator).click()
 
     def logout(self):
+        """Logout via user's panel."""
         self.find_and_click_element_by_visible_text(Const.EMAIL)
         self.find_and_click_element_by_visible_text("Logout")

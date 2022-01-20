@@ -2,14 +2,13 @@
 import time
 
 from pages.base_page import BasePage
-from settings import Const
 
 
 class LandingPage(BasePage):
 
     def verify_forgot_password_screen_opened(self):
-        self.find_and_click_element_by_visible_text(Const.EMAIL)
-        self.find_and_click_element_by_visible_text("Logout")
+        """Assert by presence of "Forgot password" string on the page."""
+        self.logout()
         self.find_and_click_element_by_visible_text("Reset password")
         return self.element_by_visible_text_is_present("Forgot password", "div")
 
