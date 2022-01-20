@@ -111,3 +111,18 @@ class PangoJuneProjectPage(BasePage):
         time.sleep(1.5)
         self.open_locations_loading_tab()
         return self.element_by_visible_text_is_present("Location loading map", "div")
+
+    def verify_sessions_tab(self):
+        self.navigate(Urls.get_user_url("pango_july15", "714167437"))
+        self.find_and_click_element_by_visible_text("Sessions")
+        return self.element_by_visible_text_is_present("No sessions have been found for the chosen period", "div")
+
+    def verify_devices_tab(self):
+        self.navigate(Urls.get_user_url("pango_july15", "714167437"))
+        self.find_and_click_element_by_visible_text("Devices")
+        return self.element_by_visible_text_is_present("Access token", "div")
+
+    def verify_purchases_tab(self):
+        self.navigate(Urls.get_user_url("pango_july15", "714167437"))
+        self.find_and_click_element_by_visible_text("Purchases")
+        return self.element_by_visible_text_is_present("User has no purchases", "div")
