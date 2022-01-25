@@ -38,7 +38,7 @@ jobs:
         
     - name: Chrome Tests
       run: |
-        pytest -v --disable-warnings --browser=chrome --healess=on --screenshot=on --screenshot_path=on --junit-xml=junit/test-results.xml --reruns 3
+        pytest -v --disable-warnings --browser=chrome --headless=on --screenshot=on --screenshot_path=on --junit-xml=junit/test-results.xml --reruns 3
     
     - name: Firefox Tests
       run: |
