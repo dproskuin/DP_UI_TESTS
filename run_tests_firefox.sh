@@ -1,1 +1,0 @@
-pytest -v --disable-warnings --browser=firefox --screenshot=on --screenshot_path=on --html=report.html --reruns 3
