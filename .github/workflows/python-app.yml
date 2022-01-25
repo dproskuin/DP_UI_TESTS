@@ -39,15 +39,26 @@ jobs:
     - name: Chrome Tests
       continue-on-error: true
       run: |
-        pytest -v --disable-warnings --browser=chrome --headless=on --screenshot=on --screenshot_path=on --junit-xml=junit/test-results.xml --reruns 3
+        pytest -v --disable-warnings --browser=chrome --headless=on --screenshot=on --screenshot_path=on --junit-xml=junit/test-results-chrome.xml --reruns 3
     
     - name: Firefox Tests
       continue-on-error: true
       run: |
-        pytest -v --disable-warnings --browser=chrome --headless=on --screenshot=on --screenshot_path=on --junit-xml=junit/test-results.xml --reruns 3
+        pytest -v --disable-warnings --browser=chrome --headless=on --screenshot=on --screenshot_path=on --junit-xml=junit/test-results-firefox.xml --reruns 3
       
-    - name: Publish Test Report
+    - name: Publish Chrome Test Report
       uses: mikepenz/action-junit-report@v2
       if: always() # always run even if the previous step fails
       with:
-        report_paths: 'junit/test-results.xml'
+        report_paths: 'junit/test-results-chrome.xml'
+        
+    - name: Publish Firefox Test Report
+      uses: mikepenz/action-junit-report@v2
+      if: always() # always run even if the previous step fails
+      with:
+        report_paths: 'junit/test-results-firefox.xml'
+
+    - uses: actions/upload-artifact@v2
+      with:
+        name: failed-screenshots
+        path: screenshot/
