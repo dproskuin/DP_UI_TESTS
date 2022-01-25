@@ -1,14 +1,17 @@
+import pytest
 
 from pages.landing_page import LandingPage
 from settings import Const
 
 
+@pytest.mark.smoke
 def test_forgot_password_screen(driver):
     page = LandingPage(driver)
     result = page.verify_forgot_password_screen_opened()
     assert result is True
 
 
+@pytest.mark.smoke
 def test_error_displayed_when_login_with_wrong_email(driver):
     page = LandingPage(driver)
     page.logout()
@@ -17,6 +20,7 @@ def test_error_displayed_when_login_with_wrong_email(driver):
     assert result is True
 
 
+@pytest.mark.smoke
 def test_error_displayed_when_login_with_wrong_password(driver):
     page = LandingPage(driver)
     page.logout()
@@ -25,6 +29,7 @@ def test_error_displayed_when_login_with_wrong_password(driver):
     assert result is True
 
 
+@pytest.mark.smoke
 def test_developer_documentation_page_opened(driver):
     page = LandingPage(driver)
     page.logout()
@@ -32,6 +37,7 @@ def test_developer_documentation_page_opened(driver):
     assert link == "https://auravpn.gitbook.io/paas/"
 
 
+@pytest.mark.smoke
 def test_privacy_policy_page_opened(driver):
     page = LandingPage(driver)
     page.logout()
@@ -39,6 +45,7 @@ def test_privacy_policy_page_opened(driver):
     assert link == "https://www.aura.com/legal/privacy-policy"
 
 
+@pytest.mark.smoke
 def test_tof_page_opened(driver):
     page = LandingPage(driver)
     page.logout()
