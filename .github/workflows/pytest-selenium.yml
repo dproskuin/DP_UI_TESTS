@@ -62,3 +62,8 @@ jobs:
       with:
         name: failed-screenshots
         path: screenshot/
+    
+    - name: Purge artifacts
+      uses: kolpav/purge-artifacts-action@v1
+      with:
+        expire-in: 1d 
