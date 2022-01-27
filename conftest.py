@@ -4,7 +4,7 @@ from selenium import webdriver
 
 from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.firefox import GeckoDriverManager
-
+from webdriver_manager.microsoft import EdgeChromiumDriverManager
 
 from pages.base_page import BasePage
 from settings import Const
@@ -12,17 +12,16 @@ from settings import Const
 
 def pytest_addoption(parser):
     parser.addoption("--browser", action="store", default="chrome",
-                     help="Choose browser: chrome, edge, firefox")
-    parser.addoption("--headless", action='store', default='off', help='headless browser: on or off')
+                     help="Choose browser: chrome, edge, firefox.")
+    parser.addoption("--headless", action='store', default='off', help='headless browser: on or off.')
 
-
-@pytest.fixture()
+@pytest.fixture
 def get_browser(request):
     browser = request.config.getoption('--browser')
     return browser
 
 
-@pytest.fixture()
+@pytest.fixture
 def headless_mode(request):
     headless_mode = request.config.getoption('--headless')
     return headless_mode
@@ -49,6 +48,15 @@ def driver(get_browser, headless_mode):
         else:
             pass
         driver = webdriver.Firefox(executable_path=GeckoDriverManager().install(), options=options)
+
+    if get_browser == "edge":
+        options = webdriver.ChromeOptions()
+        options.add_argument("--start-maximized")
+        if headless_mode == "on":
+            options.add_argument("--headless")
+        else:
+            pass
+        driver = webdriver.Edge(EdgeChromiumDriverManager().install())
 
     driver.implicitly_wait(10)
     yield driver
