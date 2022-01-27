@@ -39,54 +39,54 @@ jobs:
         sudo apt update
         sudo apt install microsoft-edge-stable
 
-
+        
     - name: Chrome Tests
       continue-on-error: true
       run: |
         pytest -v --disable-warnings --browser=chrome --headless=on --screenshot=on --screenshot_path=on --html=report.html --junit-xml=junit/test-results-chrome.xml --reruns 3 -n 2
-
+    
     - name: Firefox Tests
       continue-on-error: true
       run: |
         pytest -v --disable-warnings --browser=chrome --headless=on --screenshot=on --screenshot_path=on --html=report.html --junit-xml=junit/test-results-firefox.xml --reruns 3 -n 2
-
+      
     - name: Edge Tests
       continue-on-error: true
       run: |
         pytest -v --disable-warnings --browser=edge --headless=on --screenshot=on --screenshot_path=on --html=report.html --junit-xml=junit/test-results-edge.xml --reruns 3 -n 2
-
+  
     - name: Publish Chrome Test Report
       uses: mikepenz/action-junit-report@v2
       if: always() # always run even if the previous step fails
       with:
         report_paths: 'junit/test-results-chrome.xml'
-
+        
     - name: Publish Firefox Test Report
       uses: mikepenz/action-junit-report@v2
       if: always() # always run even if the previous step fails
       with:
         report_paths: 'junit/test-results-firefox.xml'
-
+      
     - name: Publish Edge Test Report
       uses: mikepenz/action-junit-report@v2
       if: always() # always run even if the previous step fails
       with:
         report_paths: 'junit/test-results-edge.xml'
-
-
+        
+      
 
     - uses: actions/upload-artifact@v2
       with:
         name: failed-screenshots
         path: screenshot/
-
+    
     - uses: actions/upload-artifact@v2
       with:
         name: html report
         path: report.html
-
+    
     - name: Purge artifacts
       uses: kolpav/purge-artifacts-action@v1
       with:
-        expire-in: 1d
+        expire-in: 1d 
         token: ${{ secrets.GITHUB_TOKEN }}
