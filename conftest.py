@@ -1,10 +1,10 @@
 """Contains configuration fixture for browser."""
 import pytest
+import shutil
 from selenium import webdriver
 
 from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.firefox import GeckoDriverManager
-from webdriver_manager.microsoft import EdgeChromiumDriverManager
 from msedge.selenium_tools import EdgeOptions
 
 from pages.base_page import BasePage
@@ -56,8 +56,8 @@ def driver(get_browser, headless_mode):
         edge_options.use_chromium = True
         edge_options.add_argument("--start-maximized")
         edge_options.set_capability("platform", "LINUX")
-        edge_options.binary_location = r"/usr/local/bin/msedgedriver"
-        path = "/usr/local/share/msedgedriver"
+        edge_options.binary_location = r"/usr/bin/microsoft-edge-dev"
+        path = shutil.which('msedgedriver')
         if headless_mode == "on":
             edge_options.add_argument("headless")
         else:
