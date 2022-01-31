@@ -52,16 +52,18 @@ def driver(get_browser, headless_mode):
         driver = webdriver.Firefox(executable_path=GeckoDriverManager().install(), options=options)
 
     if get_browser == "edge":
-        edge_options = EdgeOptions()
-        edge_options.use_chromium = True
-        edge_options.set_capability("platform", "LINUX")
-        edge_options.binary_location = r"/usr/bin/microsoft-edge-dev"
-        path = "/home/runner/msedgedriver"
+        options = EdgeOptions()
+        options.use_chromium = True
         if headless_mode == "on":
-            edge_options.add_argument("headless")
+            options.add_argument("headless")
         else:
             pass
-        driver = Edge(options=edge_options, executable_path=path)
+        options.binary_location = r"/usr/bin/microsoft-edge-dev"
+        options.set_capability("platform", "LINUX")
+
+        webdriver_path = r"/home/runner/msedgedriver"
+
+        driver = Edge(options=options, executable_path=webdriver_path)
 
     driver.implicitly_wait(10)
     yield driver
