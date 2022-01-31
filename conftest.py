@@ -66,7 +66,7 @@ def driver(get_browser, headless_mode):
         webdriver_path = r"/home/runner/msedgedriver"
 
         #driver = Edge(options=options, executable_path=webdriver_path)
-        driver_path = EdgeChromiumDriverManager(os_type='linux').install()
+        driver_path = EdgeChromiumDriverManager().install()
         driver = webdriver.Edge(executable_path=driver_path)
     driver.implicitly_wait(10)
     yield driver
