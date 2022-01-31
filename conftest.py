@@ -57,7 +57,7 @@ def driver(get_browser, headless_mode):
         edge_options.add_argument("--start-maximized")
         edge_options.set_capability("platform", "LINUX")
         edge_options.binary_location = r"/usr/bin/microsoft-edge-dev"
-        path = shutil.which('msedgedriver')
+        path = "/home/runner/msedgedriver"
         if headless_mode == "on":
             edge_options.add_argument("headless")
         else:
