@@ -34,11 +34,19 @@ jobs:
     - name: Install Chrome, Firefox and Edge browsers
       run: |
         sudo apt install google-chrome-stable
+        
         sudo apt-get install firefox
+        
         sudo add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/edge stable main"
         sudo apt update
         sudo apt install microsoft-edge-stable
-
+        wget https://msedgedriver.azureedge.net/95.0.1020.5/edgedriver_linux64.zip -P ~/
+        unzip ~/edgedriver_linux64.zip -d ~/
+        rm ~/edgedriver_linux64.zip
+        sudo mv -f ~/msedgedriver /usr/local/share/
+        sudo chmod 777 /usr/local/share/msedgedriver
+        sudo ln -s /usr/local/share/msedgedriver /usr/local/bin/msedgedriver
+    
         
     - name: Chrome Tests
       continue-on-error: true
