@@ -5,7 +5,7 @@ from selenium import webdriver
 
 from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.firefox import GeckoDriverManager
-from msedge.selenium_tools import EdgeOptions
+from msedge.selenium_tools import EdgeOptions, Edge
 
 from pages.base_page import BasePage
 from settings import Const
@@ -54,7 +54,6 @@ def driver(get_browser, headless_mode):
     if get_browser == "edge":
         edge_options = EdgeOptions()
         edge_options.use_chromium = True
-        edge_options.add_argument("--start-maximized")
         edge_options.set_capability("platform", "LINUX")
         edge_options.binary_location = r"/usr/bin/microsoft-edge-dev"
         path = "/home/runner/msedgedriver"
@@ -62,7 +61,7 @@ def driver(get_browser, headless_mode):
             edge_options.add_argument("headless")
         else:
             pass
-        driver = webdriver.Edge(executable_path=path)
+        driver = Edge(options=edge_options, executable_path=path)
 
     driver.implicitly_wait(10)
     yield driver
