@@ -47,17 +47,19 @@ jobs:
         sudo chmod 777 /usr/local/share/msedgedriver
         sudo ln -s /usr/local/share/msedgedriver /usr/local/bin/msedgedriver
     
-        
+      """
     - name: Chrome Tests
       continue-on-error: true
       run: |
         pytest -v --disable-warnings --browser=chrome --headless=on --screenshot=on --screenshot_path=on --html=report.html --junit-xml=junit/test-results-chrome.xml --reruns 3 -n 2
-    
+
+
     - name: Firefox Tests
       continue-on-error: true
       run: |
         pytest -v --disable-warnings --browser=chrome --headless=on --screenshot=on --screenshot_path=on --html=report.html --junit-xml=junit/test-results-firefox.xml --reruns 3 -n 2
-      
+      """
+
     - name: Edge Tests
       continue-on-error: true
       run: |

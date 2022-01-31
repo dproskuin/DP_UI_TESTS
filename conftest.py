@@ -56,12 +56,13 @@ def driver(get_browser, headless_mode):
         edge_options.use_chromium = True
         edge_options.add_argument("--start-maximized")
         edge_options.set_capability("platform", "LINUX")
-        edge_options.binary_location = "/usr/local/bin/msedgedriver"
+        edge_options.binary_location = r"/usr/local/bin/msedgedriver"
+        path = "/usr/local/bin/msedgedriver"
         if headless_mode == "on":
             edge_options.add_argument("headless")
         else:
             pass
-        driver = webdriver.Edge()
+        driver = webdriver.Edge(executable_path=path)
 
     driver.implicitly_wait(10)
     yield driver
