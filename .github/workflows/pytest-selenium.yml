@@ -46,9 +46,6 @@ jobs:
         sudo mv -f ~/msedgedriver /usr/local/share/
         sudo chmod 777 /usr/local/share/msedgedriver
         sudo ln -s /usr/local/share/msedgedriver /usr/local/bin/msedgedriver
-# debug print
-        cd /home/runner/msedgedriver
-        ls -a
 #    - name: Chrome Tests
 #      continue-on-error: true
 #      run: |
