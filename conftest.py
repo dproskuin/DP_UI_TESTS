@@ -51,13 +51,13 @@ def driver(get_browser, headless_mode):
 
     if get_browser == "edge":
         options = EdgeOptions()
-        #  options.use_chromium = True
+        options.use_chromium = True
         if headless_mode == "on":
             options.add_argument("headless")
         else:
             pass
         options.binary_location = r"/usr/bin/microsoft-edge-dev"
-        options.set_capability("platform", "LINUX")
+        options.set_capability("platform", "MAC")
 
         webdriver_path = r"/home/runner/msedgedriver"
 
