@@ -52,6 +52,8 @@ def driver(get_browser, headless_mode):
     if get_browser == "edge":
         options = EdgeOptions()
         options.use_chromium = True
+        options.add_argument('--no-sandbox')
+        options.add_argument('--disable-dev-shm-usage')
         if headless_mode == "on":
             options.add_argument("headless")
         else:
