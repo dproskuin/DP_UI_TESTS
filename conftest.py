@@ -1,14 +1,10 @@
 """Contains configuration fixture for browser."""
 import pytest
-import shutil
 from selenium import webdriver
 
 from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.firefox import GeckoDriverManager
 from msedge.selenium_tools import EdgeOptions, Edge
-from webdriver_manager.microsoft import EdgeChromiumDriverManager
-from webdriver_manager.utils import os_type
-
 from pages.base_page import BasePage
 from settings import Const
 
@@ -55,7 +51,7 @@ def driver(get_browser, headless_mode):
 
     if get_browser == "edge":
         options = EdgeOptions()
-        options.use_chromium = True
+        #  options.use_chromium = True
         if headless_mode == "on":
             options.add_argument("headless")
         else:
@@ -65,9 +61,8 @@ def driver(get_browser, headless_mode):
 
         webdriver_path = r"/home/runner/msedgedriver"
 
-        #driver = Edge(options=options, executable_path=webdriver_path)
-        driver_path = EdgeChromiumDriverManager().install()
-        driver = webdriver.Edge(executable_path=driver_path)
+        driver = Edge(options=options, executable_path=webdriver_path)
+
     driver.implicitly_wait(10)
     yield driver
     driver.quit()
