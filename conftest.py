@@ -57,9 +57,9 @@ def driver(get_browser, headless_mode):
         else:
             pass
         options.binary_location = r"/usr/bin/microsoft-edge-dev"
-        options.set_capability("platform", "MAC")
+        options.set_capability("platform", "LINUX")
 
-        driver = Edge(options=options, executable_path='/usr/local/share/msedgedriver')
+        driver = Edge(options=options, executable_path='/usr/local/bin/msedgedriver')
 
     driver.implicitly_wait(10)
     yield driver
