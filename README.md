@@ -1,9 +1,31 @@
+
+
 # Aura developer portal Web UI Automation
 
 End-To-End Web Testing Selenium, Pytest
 
 Architectural pattern - Page Object.
 
+Browsers used: Chrome, Firefox, Edge (Edge in progress).
+
+Ready for running in Github Actions. Configuration file is located in .gihub/workflows
+
+For running locally you need  Python 4, browsers and requirement packages installed.
+
+Structure:
+
+Page objects located in /pages folder, test-functions located in /tests. 
+conftest.py file contains fixtures used for tests.
+settings.py file used for storing URL's, constants, helping methods.  
+
+# Requirements: 
+
+- Knowledge of Python syntax, data-types, OOP
+- Knowledge of Selenium framework
+- Knowledge of Pytest testing framework
+- Understanding of Page Object pattern.
+
+Helpful links in the description.
 
 ##How to write a test:
 
