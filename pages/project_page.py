@@ -18,6 +18,9 @@ class ProjectPageLocators:
 
 
 class PangoJuneProjectPage(BasePage):
+    """
+    Methods for interacting with project-page and verifying methods for this page.
+    """
 
     def verify_active_sessions_by_protocol_chart(self):
         self.navigate(Urls.PANGO_JUNE_03_DASHBOARD)

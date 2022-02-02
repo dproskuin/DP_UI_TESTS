@@ -18,6 +18,9 @@ class LoginPageLocators:
 
 
 class BasePage:
+    """
+    Login-logout methods and general methods used for interacting with web elements.
+    """
 
     def __init__(self, driver: RemoteWebDriver):
         self.driver = driver

@@ -56,7 +56,7 @@ def driver(get_browser, headless_mode):
         options.add_argument('--headless')
         options.add_argument('--no-sandbox')
         options.add_argument('--disable-dev-shm-usage')
-        #  ptions.binary_location = r"/usr/bin/microsoft-edge-dev"
+        #  options.binary_location = r"/usr/bin/microsoft-edge-dev"
         options.set_capability("platform", "LINUX")
 
         driver = Edge(options=options, executable_path='/usr/local/bin/msedgedriver')

@@ -17,6 +17,9 @@ class UserTabLocators:
 
 
 class UserTab(BasePage):
+    """
+    Methods for interacting and verifying User tab. (Project -> Users -> User)
+    """
 
     def change_user_traffic(self, project_name: str, user_id: str, traffic_in_bytes: int, is_user_unlimited: bool):
         self.navigate(Urls.get_user_url(project_name, user_id))

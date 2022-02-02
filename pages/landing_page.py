@@ -5,6 +5,9 @@ from pages.base_page import BasePage
 
 
 class LandingPage(BasePage):
+    """
+    Methods for verifying elements on LandingPage.
+    """
 
     def verify_forgot_password_screen_opened(self):
         """Assert by presence of "Forgot password" string on the page."""

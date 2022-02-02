@@ -15,6 +15,9 @@ class UserProfilePageLocators:
 
 
 class UserProfilePage(BasePage):
+    """
+    Methods for interacting with User profile and verify-methods for elements.
+    """
 
     def open_profile(self):
         self.open_user_dropdown()
