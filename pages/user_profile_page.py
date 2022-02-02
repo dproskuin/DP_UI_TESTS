@@ -5,7 +5,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.action_chains import ActionChains
 
 from pages.base_page import BasePage
-from settings import Const
+from settings import Const, Variables
 
 
 class UserProfilePageLocators:
@@ -21,7 +21,7 @@ class UserProfilePage(BasePage):
 
     def open_profile(self):
         self.open_user_dropdown()
-        self.find_and_click_element_by_visible_text("View Profile")
+        self.find_and_click_element_by_visible_text(Variables.VIEW_PROFILE_BUTTON)
 
     def open_user_dropdown(self):
         if self.element_by_visible_text_is_present(Const.EMAIL, 'div') is False:
@@ -30,8 +30,8 @@ class UserProfilePage(BasePage):
 
     def verify_switch_between_profile_tabs(self):
         self.open_profile()
-        self.find_and_click_element_by_visible_text("Account security")
-        return self.element_by_visible_text_is_present("Two-factor authentication", "div")
+        self.find_and_click_element_by_visible_text(Variables.ACCOUNT_SECURITY_TAB_BUTTON)
+        return self.element_by_visible_text_is_present(Variables.TWO_FACTOR_AUTH, "div")
 
     def verify_user_dropdown_list_options(self):
         self.open_user_dropdown()
@@ -51,19 +51,19 @@ class UserProfilePage(BasePage):
 
     def verify_ability_to_logout(self):
         self.logout()
-        return self.element_by_visible_text_is_present("Sign In", "div")
+        return self.element_by_visible_text_is_present(Variables.SIGN_IN_BUTTON, "div")
 
     def change_password(self, new_password, current_password):
         self.open_profile()
-        self.find_and_click_element_by_visible_text("Account security")
+        self.find_and_click_element_by_visible_text(Variables.ACCOUNT_SECURITY_TAB_BUTTON)
         self.find_element_and_send_keys(*UserProfilePageLocators.CURRENT_PASSWORD_FIELD, current_password)
         self.find_element_and_send_keys(*UserProfilePageLocators.NEW_PASSWORD_FIELD, new_password)
         self.find_element_and_send_keys(*UserProfilePageLocators.REPEAT_NEW_PASSWORD_FIELD, new_password)
         time.sleep(2)
-        element = self.find_element_by_visible_text("Change password")
+        element = self.find_element_by_visible_text(Variables.CHANGE_PASSWORD_BUTTON)
         actions = ActionChains(self.driver)
         actions.move_to_element(element).perform()
-        self.find_and_click_button_by_text("Change password")
+        self.find_and_click_button_by_text(Variables.CHANGE_PASSWORD_BUTTON)
         time.sleep(2.5)
 
     def verify_ability_to_change_password(self):
@@ -79,12 +79,12 @@ class UserProfilePage(BasePage):
         self.navigate("")
         self.login(Const.EMAIL, Const.NEW_PASSWORD)
         self.change_password(Const.PASSWORD, Const.NEW_PASSWORD)
-        return self.element_by_visible_text_is_present("Your password has been successfully changed", "div")
+        return self.element_by_visible_text_is_present(Variables.PASSWORD_CHANGED_SUCCESS, "div")
 
     def verify_error_when_current_password_is_not_correct(self):
         """ Verify error displayed when user entered wrong password in to "current password" field. """
         self.change_password("111111111111", "222222222222")
-        return self.element_by_visible_text_is_present("Enter the current password", "div")
+        return self.element_by_visible_text_is_present(Variables.ENTER_CURRENT_PASSWORD_MESSAGE, "div")
 
     def open_country_list(self):
         return self.driver.find_element(By.NAME, "country").click()
@@ -93,7 +93,7 @@ class UserProfilePage(BasePage):
         """ Go to User profile and assert countries list opened and contains "UAE" option. """
         self.open_profile()
         self.open_country_list()
-        return self.element_by_visible_text_is_present("United Arab Emirates", "option")
+        return self.element_by_visible_text_is_present(Variables.UAE, "option")
 
     def verify_email_unavailable_to_edit(self):
         self.open_profile()

@@ -1,7 +1,7 @@
 import settings
 from pages.base_page import BasePage
 from selenium.webdriver.common.by import By
-from settings import Urls
+from settings import Urls, Variables
 
 
 class UserTabLocators:
@@ -34,7 +34,7 @@ class UserTab(BasePage):
             self.find_element_and_click(*UserTabLocators.SET_TRAFFIC_UNLIMITED_CHECKBOX_OFF)
             print(f"Change user {user_id} traffic to unlimited...")
 
-        self.find_and_click_element_by_visible_text("Set limit")
+        self.find_and_click_element_by_visible_text(Variables.SET_LIMIT_BUTTON)
 
     def verify_change_user_traffic_scenario(self):
         self.change_user_traffic("pango_july15", "714167437", 100000000, True)
@@ -54,14 +54,14 @@ class UserTab(BasePage):
     def verify_sessions_tab(self):
         self.navigate(Urls.get_user_url("pango_july15", "714167437"))
         self.find_and_click_element_by_visible_text("Sessions")
-        return self.element_by_visible_text_is_present("No sessions have been found for the chosen period", "div")
+        return self.element_by_visible_text_is_present(Variables.NO_SESSIONS_FOUND_MESSAGE, "div")
 
     def verify_devices_tab(self):
         self.navigate(Urls.get_user_url("pango_july15", "714167437"))
         self.find_and_click_element_by_visible_text("Devices")
-        return self.element_by_visible_text_is_present("Access token", "div")
+        return self.element_by_visible_text_is_present(Variables.ACCESS_TOKEN_STRING, "div")
 
     def verify_purchases_tab(self):
         self.navigate(Urls.get_user_url("pango_july15", "714167437"))
         self.find_and_click_element_by_visible_text("Purchases")
-        return self.element_by_visible_text_is_present("User has no purchases", "div")
+        return self.element_by_visible_text_is_present(Variables.NO_PURCHASES_MESSAGE, "div")
